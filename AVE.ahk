@@ -409,12 +409,12 @@ b save to register...
                     , %path_register%\register.txt, UTF-8
     }
     if (key="<") {
-        FileRead, tempX, %path_register%\register.txt, UTF-8
+        FileRead, tempX, %path_register%\register.txt
         tempX := ClipBoard "`n" tempX
         StringReplace, tempX, tempX,`r,, All
         FileDelete, %path_register%\register.txt
         FileAppend, %tempX%, %path_register%\register.txt, UTF-8
-        tempX=
+        tempX :=
     }
     ToolTip
 }
