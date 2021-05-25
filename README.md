@@ -59,9 +59,9 @@ autohotkey vi-mode for windows explorer
 | ctrl+shift+m  |  previous mark group  |
 | ,       | open preview windows |
 | .       | close preview windows |
-| z       | archieve compression or decompression, need Bandzip|
+| z       | archieve compression or decompression, need Bandzip or PeaZip |
 | q       | open query box, search on web |
-| ctrl+.  | switch to windows (global) |
+| win+/   | switch to windows (global) |
 | win+F2  | windows AlwaysOnTop (global) |
 | win+F1  | hide title (global) |
 | win+F3  | transparent windows (global) |

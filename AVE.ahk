@@ -187,7 +187,8 @@ m::setMark(confini, section)
 ^+m::selMarkGroup(confini, "backward")
 ;.
 ;; zip archieve
-z::cmdBandizip()    ; (Bandizip)zipFile
+; z::cmdBandizip()    ; (Bandizip)zipFile
+z::cmdPeazip()    ; (Peazip)
 ;.
 q::queryStart(confini, "query")
 ; /::MsgBox % getPathCB("dir")
@@ -232,6 +233,7 @@ ToolTip,%new_hint%,%X%,%Y%
   if(key="l"){
     ControlFocus, SysListView321
     ControlFocus, DirectUIHWND3
+    ControlFocus, DirectUIHWND2
   }
   if(key="a"){
     ControlFocus, Edit1
@@ -735,6 +737,48 @@ x extract
   ToolTip
 }
 ;.
+;; function: (Peazip)
+cmdPeazip() {
+    pz_fullpath := getPathCB("")
+    if (!pz_fullpath)
+        return
+    if InStr(pz_fullpath,"`r`n") {
+        pz_fullpath := """" . StrReplace(pz_fullpath, "`r`n" , """ """) . """"
+    }
+    else {
+        pz_fullpath := """" . pz_fullpath  . """"
+    }
+    new_Hint=
+(
+{Powerd by Peazip ...}
+* add2archive
+p add2pea
+7 add27z
+z add2zip
+x ext2here
+f ext2folder
+l ext2list
+)
+    ToolTip % new_hint
+    pzexe="C:\Program Files\PeaZip\peazip.exe"
+    key := getKey()
+    if (key="*")
+        Run % pzexe . " -add2archive " . pz_fullpath
+    if (key="p")
+        Run % pzexe . " -add2pea " . pz_fullpath
+    if (key="7")
+        Run % pzexe . " -add27z " . pz_fullpath
+    if (key="z")
+        Run % pzexe . " -add2zip " . pz_fullpath
+    if (key="x")
+        Run % pzexe . " -ext2here " . pz_fullpath
+    if (key="f")
+        Run % pzexe . " -ext2folder " . pz_fullpath
+    if (key="l")
+        Run % pzexe . " -ext2list " . pz_fullpath
+    ToolTip
+}
+;.
 ;; function: query string on internet
 queryStart(confini, section){
     global QB1, QB2
@@ -777,7 +821,8 @@ return
 ;.
 
 ;; #GLOBAL#  function + key : window_switcher #F1 #F2 #F3 #PrintScreen
-^.::windowSwitcher(0,0,32,"Microsoft Text Input Application")
+; RShift::SendInput {LCtrl}{LShift}
+#/::windowSwitcher(0,0,32,"Microsoft Text Input Application")
 ; "WindowsInternal.ComposableShell.Experiences.TextInput.InputApp.exe -- Microsoft Text Input Application")
     ; some exclude windows
     ; ,"Microsoft Text Input Application
